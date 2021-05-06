@@ -1,7 +1,8 @@
-package com.twentythirty.guifena
+package com.twentythirty.guifena.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.twentythirty.guifena.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
