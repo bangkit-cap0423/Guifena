@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.twentythirty.guifena.databinding.FragmentSensorBinding
+import com.twentythirty.guifena.ui.sensor.dummyData.dummySensorData
 
 class SensorFragment : Fragment() {
 
@@ -23,18 +23,24 @@ class SensorFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        sensorViewModel =
-            ViewModelProvider(this).get(SensorViewModel::class.java)
-
+    ): View {
         _binding = FragmentSensorBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return _binding!!.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        sensorViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (activity != null) {
+            sensorViewModel = ViewModelProvider(this).get(SensorViewModel::class.java)
+            val sensorAdapter = SensorAdapter()
+            sensorAdapter.setSensor(dummySensorData.setSensor())
+            with(binding.rvSensor) {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = sensorAdapter
+            }
+        }
+
     }
 
     override fun onDestroyView() {
