@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.twentythirty.guifena.R
 import com.twentythirty.guifena.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
@@ -35,6 +37,15 @@ class SettingFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+            resources.getDrawable(
+                R.drawable.actionbar_layer_list
+            )
+        )
     }
 
     override fun onDestroyView() {
