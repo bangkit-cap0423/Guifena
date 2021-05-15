@@ -4,10 +4,12 @@ package com.twentythirty.guifena.data
 import com.google.gson.annotations.SerializedName
 
 data class SensorEntity(
-    @SerializedName("coordinate")
-    val coordinate: String,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
+    @SerializedName("last_seen")
+    val lastSeen: String?,
+    @SerializedName("location")
+    val location: String?,
     @SerializedName("status")
-    val status: Int
+    val status: Int?
 )
