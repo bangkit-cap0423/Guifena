@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "525021664520",
+    "project_id": "guifena",
+    "storage_bucket": "guifena.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525021664520:android:898f4da3b269edbfb008bd",
+        "android_client_info": {
+          "package_name": "com.twentythirty.guifena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525021664520-9pd4gg8mjduk7pqm9bmvgltl39kk9ltt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPnIjYb2M5fFxk5v_xhc-friS5LlgDrJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525021664520-9pd4gg8mjduk7pqm9bmvgltl39kk9ltt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
