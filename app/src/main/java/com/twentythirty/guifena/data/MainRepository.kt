@@ -8,4 +8,5 @@ import com.twentythirty.guifena.network.GuifenaAPI
 class MainRepository(private val guifenaAPI: GuifenaAPI) {
 
     suspend fun getCount() = guifenaAPI.getCount()
+    suspend fun getSensors() = guifenaAPI.getSensors()
 }
