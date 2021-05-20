@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class SensorEntity(
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("last_seen")
-    val lastSeen: String?,
+    val lastSeen: String,
     @SerializedName("location")
-    val location: String?,
+    val location: String,
+    @SerializedName("nama")
+    val nama: String,
     @SerializedName("status")
-    val status: Int?
+    val status: Int
 )

@@ -1,5 +1,6 @@
 package com.twentythirty.guifena.network
 
+import com.twentythirty.guifena.data.CountEntity
 import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.data.SensorEntity
 import retrofit2.http.GET
@@ -11,6 +12,9 @@ import retrofit2.http.Path
 interface GuifenaAPI {
     @GET("sensors")
     suspend fun getSensors(): List<SensorEntity>
+
+    @GET("/")
+    suspend fun getCount(): CountEntity
 
     @GET("incidents")
     suspend fun getIncidents(): List<IncidentEntity>
