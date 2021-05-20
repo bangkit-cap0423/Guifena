@@ -4,13 +4,13 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.twentythirty.guifena.data.SensorEntity
 import com.twentythirty.guifena.databinding.SensorItemRowBinding
-import com.twentythirty.guifena.ui.sensor.dummyData.dummySensorEntity
 
 class SensorAdapter : RecyclerView.Adapter<SensorAdapter.SensorViewHolder>() {
-    private var listSensor = ArrayList<dummySensorEntity>()
+    private var listSensor = ArrayList<SensorEntity>()
 
-    fun setSensor(sensorEntity: List<dummySensorEntity>?) {
+    fun setSensor(sensorEntity: List<SensorEntity>?) {
         if (sensorEntity == null) return
         this.listSensor.clear()
         this.listSensor.addAll(sensorEntity)
@@ -31,17 +31,18 @@ class SensorAdapter : RecyclerView.Adapter<SensorAdapter.SensorViewHolder>() {
 
 
     class SensorViewHolder(private val binding: SensorItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(sensorEntity: dummySensorEntity) {
+        fun bind(sensorEntity: SensorEntity) {
             with(binding) {
-                tvSensorName.text = sensorEntity.sensorName
-                tvStatus.text = sensorEntity.status
-                if (sensorEntity.status == "Online"){
+                tvSensorName.text = sensorEntity.nama
+                tvStatus.text = "Online"
+                //WARNING: FIX THIS
+                if (sensorEntity.nama == "Online") {
                     tvStatus.setTextColor(Color.parseColor("#FF228B22"))
-                }else{
+                } else {
                     tvStatus.setTextColor(Color.RED)
                 }
-                tvPointName.text = sensorEntity.pointName
-                tvCoordinate.text = sensorEntity.coordinate.toString()
+                tvPointName.text = sensorEntity.nama
+                tvCoordinate.text = sensorEntity.location
             }
         }
     }

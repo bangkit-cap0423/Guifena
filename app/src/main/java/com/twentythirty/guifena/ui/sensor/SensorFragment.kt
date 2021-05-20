@@ -6,18 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.twentythirty.guifena.R
+import com.twentythirty.guifena.data.SensorEntity
 import com.twentythirty.guifena.databinding.FragmentSensorBinding
-import com.twentythirty.guifena.ui.sensor.dummyData.dummySensorData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.twentythirty.guifena.utils.Status
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SensorFragment : Fragment() {
 
-    private lateinit var sensorViewModel: SensorViewModel
+    private val sensorViewModel: SensorViewModel by sharedViewModel()
     private lateinit var _binding: FragmentSensorBinding
     private val sensorAdapter = SensorAdapter()
 
@@ -50,12 +48,21 @@ class SensorFragment : Fragment() {
     }
 
     private fun loadDummyData() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            delay(200L)
-            sensorAdapter.setSensor(dummySensorData.setSensor())
-            _binding.progressBar.visibility = View.GONE
-        }
+        sensorViewModel.getSensors()
+        sensorViewModel.sensors.observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        _binding.progressBar.visibility = View.GONE
+                        resource.data?.let {
+                            it as List<SensorEntity>
+                            sensorAdapter.setSensor(it)
+                        }
+                    }
+                }
 
+            }
+        })
     }
 
 }
