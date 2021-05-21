@@ -1,5 +1,6 @@
 package com.twentythirty.guifena.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,10 +12,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.twentythirty.guifena.R
+import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.databinding.FragmentHomeBinding
+import com.twentythirty.guifena.ui.detailIncident.DetailIncident
+import com.twentythirty.guifena.ui.sensor.dummyData.dummyIncidentData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,16 +27,15 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment() {
 
-    val homeViewModel: HomeViewModel by sharedViewModel()
+    private val homeViewModel: HomeViewModel by sharedViewModel()
     private var _binding: FragmentHomeBinding? = null
+    private val homeAdapter = HomeAdapter()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     lateinit var mainHandler: Handler
 
     companion object {
-        val TAG = "farin"
+        const val TAG = "farin"
     }
 
 
@@ -41,13 +45,34 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (activity != null) {
+            with(binding.rvIncident) {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = homeAdapter
+            }
+            val dummy = dummyIncidentData.setIncident()
+
+            homeAdapter.setIncident(dummy)
+            homeAdapter.onItemClick = { data ->
+                val intent = Intent(activity, DetailIncident::class.java)
+//              Use Parcelize data //intent.putExtra(DetailIncident.EXTRA_DATA, data)
+                intent.putExtra(DetailIncident.EXTRA_ID, dummy[0].id)
+                intent.putExtra(DetailIncident.EXTRA_SENSOR_NAME, dummy[0].sensor)
+                intent.putExtra(DetailIncident.EXTRA_POINT_LOC, dummy[0].sensorName)
+                intent.putExtra(DetailIncident.EXTRA_COORDINATE, dummy[0].sensorLocation)
+                intent.putExtra(DetailIncident.EXTRA_STATUS, dummy[0].status)
+                intent.putExtra(DetailIncident.EXTRA_TIME, dummy[0].timestamp)
+                startActivity(intent)
+            }
+        }
 
         (activity as AppCompatActivity).supportActionBar?.let {
             it.title = "Guifena"
