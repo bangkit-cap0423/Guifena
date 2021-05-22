@@ -149,17 +149,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView" />
 
-    <TextView
-        android:id="@+id/noIncident"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand"
-        android:text="Tidak ada insiden terkini."
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_incident"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/incidentTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/incidentTitle"
+        tools:listitem="@layout/incident_item_row" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

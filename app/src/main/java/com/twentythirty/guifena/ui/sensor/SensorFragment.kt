@@ -54,9 +54,9 @@ class SensorFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         _binding.progressBar.visibility = View.GONE
-                        resource.data?.let {
-                            it as List<SensorEntity>
-                            sensorAdapter.setSensor(it)
+                        resource.data?.let { sensor ->
+                            sensor as List<SensorEntity>
+                            sensorAdapter.setSensor(sensor)
                         }
                     }
                 }

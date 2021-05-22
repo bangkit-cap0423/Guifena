@@ -1,8 +1,11 @@
 package com.twentythirty.guifena.data
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class IncidentEntity(
     @SerializedName("id")
     val id: Int,
@@ -18,4 +21,4 @@ data class IncidentEntity(
     val status: Int,
     @SerializedName("timestamp")
     val timestamp: String
-)
+) : Parcelable

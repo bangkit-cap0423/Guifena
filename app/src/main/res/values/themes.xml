@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Guifena" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Guifena" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@color/green</item>
@@ -27,5 +27,6 @@
     <style name="Theme.AppLib.ActionBar.TitleTextStyle" parent="">
         <item name="android:fontFamily">@font/quicksand_bold</item>
         <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

@@ -1,9 +1,12 @@
 package com.twentythirty.guifena.ui.sensor
 
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.twentythirty.guifena.R
 import com.twentythirty.guifena.data.SensorEntity
 import com.twentythirty.guifena.databinding.SensorItemRowBinding
 
@@ -22,6 +25,7 @@ class SensorAdapter : RecyclerView.Adapter<SensorAdapter.SensorViewHolder>() {
         return SensorViewHolder(itemBinding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: SensorViewHolder, position: Int) {
         val sensor = listSensor[position]
         holder.bind(sensor)
@@ -31,14 +35,15 @@ class SensorAdapter : RecyclerView.Adapter<SensorAdapter.SensorViewHolder>() {
 
 
     class SensorViewHolder(private val binding: SensorItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.M)
         fun bind(sensorEntity: SensorEntity) {
             with(binding) {
                 tvSensorName.text = sensorEntity.nama
-                tvStatus.text = "Online"
-                //WARNING: FIX THIS
-                if (sensorEntity.nama == "Online") {
-                    tvStatus.setTextColor(Color.parseColor("#FF228B22"))
+                if (sensorEntity.status == 1) {
+                    tvStatus.text = itemView.context.getString(R.string.online_status)
+                    tvStatus.setTextColor(itemView.context.getColor(R.color.green))
                 } else {
+                    tvStatus.text =itemView.context.getString(R.string.offline_status)
                     tvStatus.setTextColor(Color.RED)
                 }
                 tvPointName.text = sensorEntity.nama
