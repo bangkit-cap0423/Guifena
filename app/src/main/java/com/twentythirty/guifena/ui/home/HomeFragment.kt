@@ -63,13 +63,7 @@ class HomeFragment : Fragment() {
             homeAdapter.setIncident(dummy)
             homeAdapter.onItemClick = { data ->
                 val intent = Intent(activity, DetailIncident::class.java)
-//              Use Parcelize data //intent.putExtra(DetailIncident.EXTRA_DATA, data)
-                intent.putExtra(DetailIncident.EXTRA_ID, dummy[0].id)
-                intent.putExtra(DetailIncident.EXTRA_SENSOR_NAME, dummy[0].sensor)
-                intent.putExtra(DetailIncident.EXTRA_POINT_LOC, dummy[0].sensorName)
-                intent.putExtra(DetailIncident.EXTRA_COORDINATE, dummy[0].sensorLocation)
-                intent.putExtra(DetailIncident.EXTRA_STATUS, dummy[0].status)
-                intent.putExtra(DetailIncident.EXTRA_TIME, dummy[0].timestamp)
+                intent.putExtra(DetailIncident.EXTRA_DATA, data)
                 startActivity(intent)
             }
         }

@@ -4,17 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.twentythirty.guifena.R
+import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.databinding.ActivityDetailIncidentBinding
 
 class DetailIncident : AppCompatActivity() {
     companion object {
         const val EXTRA_DATA = "extra_data"
-        const val EXTRA_ID = "extra_id"
-        const val EXTRA_POINT_LOC = "extra_point_loc"
-        const val EXTRA_COORDINATE = "extra_coordinate"
-        const val EXTRA_STATUS = "extra_status"
-        const val EXTRA_SENSOR_NAME = "extra_sensor_name"
-        const val EXTRA_TIME = "extra_time"
     }
 
     private lateinit var binding: ActivityDetailIncidentBinding
@@ -24,27 +19,22 @@ class DetailIncident : AppCompatActivity() {
         binding = ActivityDetailIncidentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val id = intent.getIntExtra(EXTRA_ID, 0)
-        val sensorName = intent.getIntExtra(EXTRA_SENSOR_NAME, 0)
-        val pointLocation = intent.getStringExtra(EXTRA_POINT_LOC)
-        val coordinate = intent.getStringExtra(EXTRA_COORDINATE)
-        val status = intent.getIntExtra(EXTRA_STATUS, 0)
-        val timeStamp = intent.getStringExtra(EXTRA_TIME)
+        val data = intent.getParcelableExtra<IncidentEntity>(EXTRA_DATA)
 
         binding.apply {
-            supportActionBar?.title = "Insiden #$id"
+            supportActionBar?.title = "Insiden #${data?.id}"
 
-            tvSensorName.text = getString(R.string.sensor_name, sensorName)
-            tvPointName.text = pointLocation
-            tvCoordinate.text = coordinate
-            tvTime.text = timeStamp
+            tvSensorName.text = getString(R.string.sensor_name, data?.sensor)
+            tvPointName.text = data?.sensorName
+            tvCoordinate.text = data?.sensorLocation
+            tvTime.text = data?.timestamp
 
-            var statusChange = status
-            setStatus(statusChange)
+            var statusChange = data?.status
+            setStatus(statusChange!!)
             btnStatus.setOnClickListener {
                 //set incident status here
                 statusChange = 1
-                setStatus(statusChange)
+                setStatus(statusChange!!)
             }
 
             btnDone.setOnClickListener {

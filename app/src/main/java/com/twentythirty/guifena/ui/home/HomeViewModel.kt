@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.twentythirty.guifena.data.MainRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel(val mainRepository: MainRepository) : ViewModel() {
+class HomeViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     private val _textOnline = MutableLiveData<String>().apply {
         value = "0"
