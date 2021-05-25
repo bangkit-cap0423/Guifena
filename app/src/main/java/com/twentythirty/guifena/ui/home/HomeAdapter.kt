@@ -1,6 +1,5 @@
 package com.twentythirty.guifena.ui.home
 
-import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -40,19 +39,19 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.IncidentViewHolder>() {
         fun bind(incident: IncidentEntity) {
             with(binding) {
                 when (incident.status) {
-                    1 -> {
+                    2 -> {
                         //set incident status to Handled
                         tvStatus.text = itemView.context.getString(R.string.handled)
                         tvStatus.setTextColor(itemView.context.getColor(R.color.yellow))
                     }
-                    0 -> {
+                    1 -> {
                         //Initial status not Handled
                         tvStatus.text = itemView.context.getString(R.string.not_handled)
-                        tvStatus.setTextColor(Color.RED)
+                        tvStatus.setTextColor(itemView.context.getColor(R.color.red))
                     }
-                    else -> {
-                        //Incident resolved
-                        //Remove item from recycleView
+                    3 -> {
+                        tvStatus.text = itemView.context.getString(R.string.complete_handle)
+                        tvStatus.setTextColor(itemView.context.getColor(R.color.green))
                     }
                 }
                 tvIncidentNumber.text = itemView.context.getString(R.string.incident_number, incident.id)

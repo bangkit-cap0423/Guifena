@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:elevation="16dp"
     android:orientation="horizontal">
 
     <TextView
@@ -17,6 +14,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="@font/quicksand_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/incident_number" />
@@ -25,13 +23,13 @@
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/quicksand_bold"
+        android:text="@string/sensor_status"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/sensor_status" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_point_name"
@@ -39,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/quicksand"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_incident_number"
         tools:text="@string/point_name" />
@@ -59,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/quicksand"
         app:layout_constraintStart_toEndOf="@+id/iv_pin_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_point_name"
         tools:text="@string/coordinate" />

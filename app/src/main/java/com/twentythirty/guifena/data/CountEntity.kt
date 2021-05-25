@@ -7,5 +7,7 @@ data class CountEntity(
     @SerializedName("incidents_count")
     val incidentsCount: Int,
     @SerializedName("sensors_count")
-    val sensorsCount: Int
+    val sensorsCount: Int,
+    @SerializedName("all_good")
+    val allGood: Boolean
 )
