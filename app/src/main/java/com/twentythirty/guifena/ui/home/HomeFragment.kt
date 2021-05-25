@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ import com.twentythirty.guifena.R
 import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.databinding.FragmentHomeBinding
 import com.twentythirty.guifena.ui.detailIncident.DetailIncident
-import com.twentythirty.guifena.ui.sensor.dummyData.dummyIncidentData
+import com.twentythirty.guifena.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,9 +59,7 @@ class HomeFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = homeAdapter
             }
-            val dummy = dummyIncidentData.setIncident()
 
-            homeAdapter.setIncident(dummy)
             homeAdapter.onItemClick = { data ->
                 val intent = Intent(activity, DetailIncident::class.java)
                 intent.putExtra(DetailIncident.EXTRA_DATA, data)
@@ -104,6 +103,46 @@ class HomeFragment : Fragment() {
         homeViewModel.incidentText.observe(viewLifecycleOwner, {
             binding.txIncidentCount.text = it
         })
+        homeViewModel.allGood.observe(viewLifecycleOwner, {
+            if (it) {
+                binding.allClearText.text = "Semua Aman"
+                binding.allClearText.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+            } else {
+                binding.allClearText.text = "Ada Masalah"
+                binding.allClearText.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.red
+                    )
+                )
+            }
+        })
+        homeViewModel.recentIncidents.observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { sensor ->
+                            sensor as List<IncidentEntity>
+                            if (sensor.isNotEmpty()) {
+                                homeAdapter.setIncident(sensor)
+                                binding.noIncident.visibility = View.GONE
+                                binding.rvIncident.visibility = View.VISIBLE
+                            } else {
+                                binding.noIncident.visibility = View.VISIBLE
+                                binding.rvIncident.visibility = View.GONE
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        })
     }
 
     private val fetchDataTask = object : Runnable {
@@ -122,10 +161,9 @@ class HomeFragment : Fragment() {
                     Log.w(TAG, "Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
-                val token = task.result
-                //SEND TOKEN TO SERVER
-                Log.d("farin", token!!)
-                Toast.makeText(context, token, Toast.LENGTH_SHORT).show()
+                task.result?.let {
+                    homeViewModel.sendToken(it)
+                }
             })
         }
     }

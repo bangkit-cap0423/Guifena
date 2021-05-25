@@ -3,7 +3,10 @@ package com.twentythirty.guifena.network
 import com.twentythirty.guifena.data.CountEntity
 import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.data.SensorEntity
+import com.twentythirty.guifena.data.TokenEntity
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 /**
@@ -19,9 +22,15 @@ interface GuifenaAPI {
     @GET("incidents")
     suspend fun getIncidents(): List<IncidentEntity>
 
+    @GET("incidents/recents/")
+    suspend fun getRecentIncidents(): List<IncidentEntity>
+
     @GET("sensors/{sensorId}/")
     suspend fun getSensorDetail(@Path("sensorId") sensorId: Int): SensorEntity
 
     @GET("incidents/{incidentId}/")
     suspend fun getIncidentDetail(@Path("incidentId") incidentId: Int): IncidentEntity
+
+    @POST("token/")
+    suspend fun sendToken(@Body tokenEntity: TokenEntity)
 }
