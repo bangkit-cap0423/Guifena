@@ -11,4 +11,6 @@ class MainRepository(private val guifenaAPI: GuifenaAPI) {
     suspend fun getSensors() = guifenaAPI.getSensors()
     suspend fun getRecentIncidents() = guifenaAPI.getRecentIncidents()
     suspend fun sendToken(tokenEntity: TokenEntity) = guifenaAPI.sendToken(tokenEntity)
+    suspend fun changeIncidentStatus(statusPayload: StatusPayload) =
+        guifenaAPI.changeIncidentStatus(statusPayload)
 }
