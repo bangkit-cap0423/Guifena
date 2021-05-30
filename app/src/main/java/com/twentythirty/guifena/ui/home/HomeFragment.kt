@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,6 +19,7 @@ import com.twentythirty.guifena.R
 import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.databinding.FragmentHomeBinding
 import com.twentythirty.guifena.ui.detailIncident.DetailIncident
+import com.twentythirty.guifena.ui.listIncident.ListIncidentActivity
 import com.twentythirty.guifena.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -75,7 +75,8 @@ class HomeFragment : Fragment() {
         fetchData()
         mainHandler = Handler(Looper.getMainLooper())
         binding.btnAllIncident.setOnClickListener {
-            Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, ListIncidentActivity::class.java)
+            startActivity(intent)
         }
 
     }

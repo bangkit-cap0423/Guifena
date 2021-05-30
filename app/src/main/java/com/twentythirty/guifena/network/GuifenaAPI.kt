@@ -1,9 +1,6 @@
 package com.twentythirty.guifena.network
 
-import com.twentythirty.guifena.data.CountEntity
-import com.twentythirty.guifena.data.IncidentEntity
-import com.twentythirty.guifena.data.SensorEntity
-import com.twentythirty.guifena.data.TokenEntity
+import com.twentythirty.guifena.data.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -33,4 +30,7 @@ interface GuifenaAPI {
 
     @POST("token/")
     suspend fun sendToken(@Body tokenEntity: TokenEntity)
+
+    @POST("incidents/changestatus/")
+    suspend fun changeIncidentStatus(@Body statusPayload: StatusPayload)
 }
