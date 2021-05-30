@@ -32,6 +32,11 @@ class ListIncidentActivity : AppCompatActivity() {
         setObservers()
     }
 
+    override fun onResume() {
+        listIncidentViewModel.fetchIncidents()
+        super.onResume()
+    }
+
     private fun setObservers() {
         listIncidentViewModel.fetchIncidents()
         listIncidentViewModel.incidents.observe(this, {
@@ -52,7 +57,6 @@ class ListIncidentActivity : AppCompatActivity() {
                         }
                     }
                 }
-
             }
         })
     }

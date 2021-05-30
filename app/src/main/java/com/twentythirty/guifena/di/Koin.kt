@@ -2,6 +2,7 @@ package com.twentythirty.guifena.di
 
 import com.twentythirty.guifena.data.MainRepository
 import com.twentythirty.guifena.network.RetroBuilder
+import com.twentythirty.guifena.ui.detailIncident.DetailIncidentViewModel
 import com.twentythirty.guifena.ui.home.HomeViewModel
 import com.twentythirty.guifena.ui.listIncident.ListIncidentViewModel
 import com.twentythirty.guifena.ui.sensor.SensorViewModel
@@ -15,5 +16,6 @@ object Koin {
         viewModel { HomeViewModel(get()) }
         viewModel { SensorViewModel(get()) }
         viewModel { ListIncidentViewModel(get()) }
+        viewModel { DetailIncidentViewModel(get()) }
     }
 }
