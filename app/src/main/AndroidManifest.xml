@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApp"
@@ -13,7 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomActionBarTheme">
-        <activity android:name=".ui.listIncident.ListIncidentActivity"></activity>
+        <activity android:name=".ui.maps.MapsActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".ui.listIncident.ListIncidentActivity" />
         <activity android:name=".ui.detailIncident.DetailIncident" />
         <activity android:name=".ui.alert.AlertActivity" />
         <activity android:name=".ui.main.MainActivity">
