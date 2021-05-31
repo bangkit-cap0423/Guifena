@@ -27,4 +27,6 @@ class SensorViewModel(val mainRepository: MainRepository) : ViewModel() {
             }
         }
     }
+
+    suspend fun getSensorAsync() = mainRepository.getSensors()
 }
