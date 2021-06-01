@@ -26,7 +26,6 @@ class DetailIncident : AppCompatActivity() {
         setContentView(binding.root)
 
         val data = intent.getParcelableExtra<IncidentEntity>(EXTRA_DATA)
-
         binding.apply {
             supportActionBar?.title = "Insiden #${data?.id}"
 

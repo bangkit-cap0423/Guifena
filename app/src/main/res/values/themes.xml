@@ -29,4 +29,8 @@
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/quicksand_medium</item>
+    </style>
 </resources>
