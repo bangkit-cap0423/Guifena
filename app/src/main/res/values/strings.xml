@@ -21,4 +21,7 @@
     <string name="incident_status">Status</string>
     <string name="need_handle">Perlu Ditangani</string>
     <string name="complete_handle">Masalah Selesai</string>
+    <string name="title_edt_nama">Nama</string>
+    <string name="hint_edt_atur_nama">Atur Nama</string>
+    <string name="btn_simpan">SIMPAN</string>
 </resources>

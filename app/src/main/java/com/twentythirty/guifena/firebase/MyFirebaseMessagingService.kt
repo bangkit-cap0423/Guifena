@@ -11,7 +11,7 @@ import com.twentythirty.guifena.ui.alert.AlertActivity
  */
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(p0: String) {
-        Log.d("farin", p0)
+//        Log.d("farin", p0)
         super.onNewToken(p0)
 
     }

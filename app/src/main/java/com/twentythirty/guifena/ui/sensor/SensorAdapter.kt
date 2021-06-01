@@ -38,7 +38,7 @@ class SensorAdapter : RecyclerView.Adapter<SensorAdapter.SensorViewHolder>() {
         @RequiresApi(Build.VERSION_CODES.M)
         fun bind(sensorEntity: SensorEntity) {
             with(binding) {
-                tvSensorName.text = sensorEntity.nama
+                tvSensorName.text = itemView.context.getString(R.string.sensor_name, sensorEntity.id)
                 if (sensorEntity.status == 1) {
                     tvStatus.text = itemView.context.getString(R.string.online_status)
                     tvStatus.setTextColor(itemView.context.getColor(R.color.green))

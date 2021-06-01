@@ -20,6 +20,7 @@ import com.twentythirty.guifena.data.IncidentEntity
 import com.twentythirty.guifena.databinding.FragmentHomeBinding
 import com.twentythirty.guifena.ui.detailIncident.DetailIncident
 import com.twentythirty.guifena.ui.listIncident.ListIncidentActivity
+import com.twentythirty.guifena.ui.setting.SettingFragment.Companion.TAG_NAMA
 import com.twentythirty.guifena.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by sharedViewModel()
     private var _binding: FragmentHomeBinding? = null
     private val homeAdapter = HomeAdapter()
+    private var nama: String? = null
 
     private val binding get() = _binding!!
     lateinit var mainHandler: Handler
@@ -58,6 +60,13 @@ class HomeFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = homeAdapter
+
+                getSavedData()
+                if (nama.isNullOrBlank()){
+                    binding.tvHomeNama.text = "Silahkan set nama anda pada bagian setting"
+                } else {
+                    binding.tvHomeNama.text = "Hai,\n$nama"
+                }
             }
 
             homeAdapter.onItemClick = { data ->
@@ -94,6 +103,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getSavedData() {
+        context?.getSharedPreferences("setting", 0).apply {
+            nama = this?.getString(TAG_NAMA, null)
+        }
     }
 
     private fun fetchData() {

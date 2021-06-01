@@ -1,44 +1,37 @@
 package com.twentythirty.guifena.ui.setting
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.twentythirty.guifena.R
 import com.twentythirty.guifena.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
 
-    private lateinit var settingViewModel: SettingViewModel
-    private var _binding: FragmentSettingBinding? = null
+    companion object {
+        const val TAG_NAMA = "nama"
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentSettingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        settingViewModel =
-            ViewModelProvider(this).get(SettingViewModel::class.java)
-
+    ): View {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        settingViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        return binding.root
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
@@ -46,6 +39,22 @@ class SettingFragment : Fragment() {
                 R.drawable.actionbar_layer_list
             )
         )
+
+
+        binding.btnSimpan.setOnClickListener {
+            val nama = binding.edtNama.text.toString()
+
+            if (nama.isBlank()){
+                Toast.makeText(context, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            } else {
+                val preferance = context?.getSharedPreferences("setting", 0)
+                preferance?.edit().apply {
+                    this?.putString(TAG_NAMA, nama)
+                    this?.apply()
+                }
+                Toast.makeText(context, "berhasil", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
