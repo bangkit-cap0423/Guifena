@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                 if (nama.isNullOrBlank()){
                     binding.tvHomeNama.text = "Silahkan set nama anda pada bagian setting"
                 } else {
-                    binding.tvHomeNama.text = nama
+                    binding.tvHomeNama.text = "Hai,\n$nama"
                 }
             }
 
