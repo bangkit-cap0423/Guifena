@@ -29,6 +29,7 @@ class ListIncidentActivity : AppCompatActivity() {
             intent.putExtra(DetailIncident.EXTRA_DATA, data)
             startActivity(intent)
         }
+        supportActionBar?.title = "Daftar Insiden"
         setObservers()
     }
 
